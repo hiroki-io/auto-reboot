@@ -1,6 +1,6 @@
-# Auto Reboot
+# auto-reboot
 
-Auto Reboot restarts a Mac that stays locked for a set period to put data on
+auto-reboot restarts a Mac that stays locked for a set period to put data on
 [FileVault](https://support.apple.com/guide/deployment/intro-to-filevault-dep82064ec40/web)
 volumes at rest. By default, it restarts a Mac that remains locked for 8 hours,
 clearing the volume key to make physical extraction of data on the device more
