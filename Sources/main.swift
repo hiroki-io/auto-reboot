@@ -7,6 +7,15 @@ func requireRoot() {
   }
 }
 
+let usage = """
+  usage: auto-reboot status
+         auto-reboot enable
+         auto-reboot disable
+         auto-reboot lock-time <duration>
+         auto-reboot uninstall
+
+  """
+
 func runAsRoot(_ command: () -> Bool) -> Never {
   requireRoot()
   exit(command() ? 0 : 1)
@@ -36,16 +45,9 @@ case let arguments where arguments.count == 2 && arguments[0] == "lock-time":
   }
 case ["uninstall"]:
   runAsRoot(Commands.uninstall)
+case ["help"], ["--help"], ["-h"]:
+  print(usage, terminator: "")
 default:
-  FileHandle.standardError.write(
-    Data(
-      """
-      usage: auto-reboot status
-             auto-reboot enable
-             auto-reboot disable
-             auto-reboot lock-time <duration>
-             auto-reboot uninstall
-
-      """.utf8))
+  FileHandle.standardError.write(Data(usage.utf8))
   exit(2)
 }
